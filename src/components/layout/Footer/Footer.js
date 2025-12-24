@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import styles from './Footer.module.scss';
+import Link from "next/link";
+import styles from "./Footer.module.scss";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,22 +16,22 @@ export default function Footer() {
           <div className={styles.links}>
             <div className={styles.linkColumn}>
               <h4>Product</h4>
-              <Link href="/create">Create Party</Link>
-              <Link href="/dashboard">Dashboard</Link>
-              <Link href="/auth/signup">Sign Up</Link>
+              <Link href='/create'>Create Party</Link>
+              <Link href='/dashboard'>Dashboard</Link>
+              <Link href='/auth/signup'>Sign Up</Link>
             </div>
 
             <div className={styles.linkColumn}>
               <h4>Support</h4>
-              <Link href="/about">About</Link>
-              <Link href="/contact">Contact</Link>
-              <Link href="/faq">FAQ</Link>
+              <Link href='/about'>About</Link>
+              <Link href='/contact'>Contact</Link>
+              <Link href='/faq'>FAQ</Link>
             </div>
 
             <div className={styles.linkColumn}>
               <h4>Legal</h4>
-              <Link href="/privacy">Privacy Policy</Link>
-              <Link href="/terms">Terms of Service</Link>
+              <Link href='/privacy'>Privacy Policy</Link>
+              <Link href='/terms'>Terms of Service</Link>
             </div>
           </div>
         </div>
@@ -39,7 +39,12 @@ export default function Footer() {
         <div className={styles.bottom}>
           <p>&copy; {currentYear} Playlist Party. All rights reserved.</p>
           <div className={styles.social}>
-            <span>Built with 💚 for music lovers</span>
+            <span>
+              Built with ❤️ by{" "}
+              <a href='https://danielhart.co/' target='_blank'>
+                Daniel Hart
+              </a>
+            </span>
           </div>
         </div>
       </div>

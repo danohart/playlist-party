@@ -6,6 +6,17 @@
   gap: $spacing-lg;
 }
 
+.googleButton {
+  position: relative;
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 16px;
+}
+
 .divider {
   display: flex;
   align-items: center;
