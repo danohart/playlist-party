@@ -103,6 +103,7 @@ export default function PartyPage() {
   const hoursUntilDeadline = Math.floor(
     (timeUntilDeadline % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
   );
+  const shareUrl = `${window.location.origin}/join/${party.code}`;
 
   return (
     <MainLayout>
@@ -122,26 +123,9 @@ export default function PartyPage() {
             {party.description && (
               <p className={styles.description}>{party.description}</p>
             )}
-          </div>
-        </div>
-
-        {/* Party Info Cards */}
-        <div className={styles.infoGrid}>
-          <Card>
-            <h3>Party Code</h3>
-            <div className={styles.code}>{party.code}</div>
-            <Button
-              variant='secondary'
-              size='small'
-              onClick={copyPartyCode}
-              fullWidth
-            >
-              Copy Code
-            </Button>
-          </Card>
-
-          <Card>
-            <h3>Deadline</h3>
+            <div className={styles.divider}>
+              <span>Deadline</span>
+            </div>
             <p className={styles.deadline}>
               {deadline.toLocaleDateString("en-US", {
                 weekday: "long",
@@ -167,14 +151,41 @@ export default function PartyPage() {
                     } left`}
               </Badge>
             )}
+          </div>
+        </div>
+
+        {/* Party Info Cards */}
+        <div className={styles.infoGrid}>
+          <Card>
+            <h3>Party Code</h3>
+            <div className={styles.code}>{party.code}</div>
+            <Button
+              variant='secondary'
+              size='small'
+              onClick={copyPartyCode}
+              fullWidth
+            >
+              Copy Code
+            </Button>
           </Card>
 
           <Card>
-            <h3>Submissions</h3>
-            <div className={styles.statsNumber}>
-              {party.totalSubmissions || 0}
+            <h3>Share This Party</h3>
+            <p style={{ marginBottom: "20px", color: "#475532" }}>
+              Invite friends to join by sharing this link
+            </p>
+
+            <div className={styles.shareSection}>
+              <div className={styles.shareItem}>
+                <label className={styles.shareLabel}>Join URL</label>
+                <div className={styles.shareBox}>
+                  <code className={styles.shareUrl}>{shareUrl}</code>
+                  <Button variant='primary' onClick={copyShareLink}>
+                    Copy Link
+                  </Button>
+                </div>
+              </div>
             </div>
-            <p className={styles.statsLabel}>songs submitted</p>
           </Card>
         </div>
 
@@ -256,25 +267,6 @@ export default function PartyPage() {
                 onVotesSubmitted={fetchSubmissions}
               />
             )}
-          </Card>
-        )}
-
-        {/* Share Section */}
-        {submissions.length === 0 && (
-          <Card padding='large' style={{ marginTop: "30px" }}>
-            <h2>Invite People to Join</h2>
-            <p style={{ marginBottom: "20px", color: "#475532" }}>
-              Share this link with your friends to let them submit songs
-            </p>
-
-            <div className={styles.shareBox}>
-              <code className={styles.shareUrl}>
-                {window.location.origin}/join/{party.code}
-              </code>
-              <Button variant='primary' onClick={copyShareLink}>
-                Copy Link
-              </Button>
-            </div>
           </Card>
         )}
 
