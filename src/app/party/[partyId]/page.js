@@ -10,6 +10,7 @@ import Badge from '@/components/ui/Badge/Badge';
 import Select from '@/components/forms/Select/Select';
 import LoadingSpinner from '@/components/ui/LoadingSpinner/LoadingSpinner';
 import SubmissionList from '@/components/party/SubmissionList/SubmissionList';
+import VotingInterface from '@/components/party/VotingInterface/VotingInterface';
 import { useToast } from '@/context/ToastContext';
 import styles from './page.module.scss';
 
@@ -22,6 +23,7 @@ export default function PartyPage() {
   const [submissions, setSubmissions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState('time_desc');
+  const [viewMode, setViewMode] = useState('view'); // 'view' or 'vote'
 
   useEffect(() => {
     fetchParty();
@@ -192,26 +194,59 @@ export default function PartyPage() {
           )}
         </div>
 
-        {/* Submissions List */}
+        {/* Submissions / Voting */}
         {submissions.length > 0 && (
           <Card padding="large" style={{ marginTop: '30px' }}>
             <div className={styles.submissionsHeader}>
               <h2>Submitted Songs ({submissions.length})</h2>
-              <Select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                options={[
-                  { value: 'time_desc', label: 'Newest First' },
-                  { value: 'time_asc', label: 'Oldest First' },
-                  { value: 'votes_desc', label: 'Most Votes' },
-                  { value: 'votes_asc', label: 'Least Votes' },
-                ]}
-              />
+              <div className={styles.controls}>
+                {party.settings.votingEnabled && (
+                  <div className={styles.viewToggle}>
+                    <Button
+                      variant={viewMode === 'view' ? 'primary' : 'ghost'}
+                      size="small"
+                      onClick={() => setViewMode('view')}
+                    >
+                      View
+                    </Button>
+                    <Button
+                      variant={viewMode === 'vote' ? 'primary' : 'ghost'}
+                      size="small"
+                      onClick={() => setViewMode('vote')}
+                    >
+                      Vote
+                    </Button>
+                  </div>
+                )}
+                {viewMode === 'view' && (
+                  <Select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    options={[
+                      { value: 'time_desc', label: 'Newest First' },
+                      { value: 'time_asc', label: 'Oldest First' },
+                      { value: 'votes_desc', label: 'Most Votes' },
+                      { value: 'votes_asc', label: 'Least Votes' },
+                    ]}
+                  />
+                )}
+              </div>
             </div>
-            <SubmissionList 
-              submissions={submissions} 
-              showSubmitter={party.settings.showSubmitters}
-            />
+
+            {viewMode === 'view' ? (
+              <SubmissionList 
+                submissions={submissions} 
+                showSubmitter={party.settings.showSubmitters}
+              />
+            ) : (
+              <VotingInterface
+                submissions={submissions}
+                partyId={params.partyId}
+                votingSystem={party.settings.votingSystem}
+                showSubmitter={party.settings.showSubmitters}
+                onVotesSubmitted={fetchSubmissions}
+              />
+            )}
           </Card>
         )}
 

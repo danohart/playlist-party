@@ -1,0 +1,232 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.header {
+  @include flex-between;
+  padding: $spacing-lg;
+  background: rgba($color-primary, 0.1);
+  border-radius: $radius-lg;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.counters {
+  display: flex;
+  gap: $spacing-xl;
+  flex-wrap: wrap;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.counterLabel {
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background: $color-white;
+  border-radius: $radius-lg;
+  transition: all $transition-base;
+  
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.number {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-text-tertiary;
+  min-width: 30px;
+  text-align: center;
+}
+
+.albumArt {
+  width: 60px;
+  height: 60px;
+  border-radius: $radius-sm;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: $font-weight-semibold;
+  color: $color-dark;
+  @include truncate;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xs;
+}
+
+.explicit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: rgba($color-dark, 0.6);
+  color: $color-white;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.artist {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  @include truncate;
+  margin-bottom: $spacing-xs;
+}
+
+.meta {
+  display: flex;
+  gap: $spacing-sm;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: $spacing-xs;
+}
+
+.album {
+  @include truncate;
+}
+
+.duration {
+  flex-shrink: 0;
+}
+
+.submitter {
+  font-size: $font-size-xs;
+  color: $color-dark-green;
+}
+
+.voteStats {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+}
+
+.statUpvote {
+  color: $color-success;
+}
+
+.statDownvote {
+  color: $color-warning;
+}
+
+.voteControls {
+  display: flex;
+  gap: $spacing-md;
+  flex-shrink: 0;
+}
+
+.voteGroup {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.voteDecrement,
+.voteIncrement {
+  @include button-reset;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-sm;
+  background: rgba($color-dark, 0.1);
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  transition: all $transition-fast;
+  
+  &:hover:not(:disabled) {
+    background: rgba($color-dark, 0.2);
+    transform: scale(1.1);
+  }
+  
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+  
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.voteDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  padding: $spacing-sm;
+  border-radius: $radius-md;
+  background: rgba($color-dark, 0.05);
+  transition: all $transition-base;
+  
+  &.active {
+    background: $color-success;
+    box-shadow: $shadow-md;
+    transform: scale(1.05);
+  }
+  
+  &.downvote.active {
+    background: $color-warning;
+  }
+}
+
+.voteIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.voteCount {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: flex-end;
+  padding: $spacing-lg;
+  background: rgba($color-dark, 0.03);
+  border-radius: $radius-lg;
+  position: sticky;
+  bottom: 0;
+  box-shadow: $shadow-lg;
+}
+
+.savedMessage {
+  text-align: center;
+  padding: $spacing-lg;
+  color: $color-success;
+  font-weight: $font-weight-medium;
+}

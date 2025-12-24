@@ -57,8 +57,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// Only define indexes once using schema.index()
-userSchema.index({ email: 1 });
+// Indexes - only define once
 userSchema.index({ oauthProvider: 1, oauthId: 1 });
 
 userSchema.pre('save', function(next) {

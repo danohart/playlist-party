@@ -6,23 +6,20 @@ const partySchema = new mongoose.Schema({
     required: true,
     trim: true,
     minlength: 3,
-    maxlength: 50,
+    maxlength: 100,
   },
   code: {
     type: String,
     required: true,
     unique: true,
     uppercase: true,
-    index: true,
   },
   theme: {
     type: String,
-    trim: true,
     maxlength: 200,
   },
   description: {
     type: String,
-    trim: true,
     maxlength: 500,
   },
   creator: {
@@ -85,17 +82,16 @@ const partySchema = new mongoose.Schema({
     enum: ['collecting', 'revealed', 'archived'],
     default: 'collecting',
   },
-  revealedAt: {
-    type: Date,
-  },
   participants: [{
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       refPath: 'participants.userType',
+      required: true,
     },
     userType: {
       type: String,
       enum: ['User', 'AnonymousUser'],
+      required: true,
     },
     joinedAt: {
       type: Date,
@@ -116,9 +112,10 @@ const partySchema = new mongoose.Schema({
   },
 });
 
-partySchema.index({ code: 1 });
-partySchema.index({ creator: 1 });
+// Indexes
+partySchema.index({ creator: 1, createdAt: -1 });
 partySchema.index({ status: 1, deadline: 1 });
+partySchema.index({ 'participants.userId': 1 });
 
 partySchema.pre('save', function(next) {
   this.updatedAt = Date.now();

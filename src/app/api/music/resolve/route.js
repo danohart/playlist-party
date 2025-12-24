@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
-import { getTrack } from '@/lib/api/spotify';
-import { resolveSong } from '@/lib/api/songlink';
-import connectDB from '@/lib/db/mongodb';
-import SongCache from '@/lib/db/models/SongCache';
+import { NextResponse } from "next/server";
+import { getTrack } from "@/lib/api/spotify";
+import { resolveSong } from "@/lib/api/songlink";
+import connectDB from "@/lib/db/mongodb";
+import SongCache from "@/lib/db/models/SongCache";
 
 export async function POST(request) {
   try {
@@ -10,7 +10,7 @@ export async function POST(request) {
 
     if (!spotifyId && !spotifyUrl) {
       return NextResponse.json(
-        { error: 'Either spotifyId or spotifyUrl is required' },
+        { error: "Either spotifyId or spotifyUrl is required" },
         { status: 400 }
       );
     }
@@ -19,9 +19,9 @@ export async function POST(request) {
 
     // Check cache first
     if (spotifyId) {
-      const cached = await SongCache.findOne({ 
+      const cached = await SongCache.findOne({
         spotifyId,
-        expiresAt: { $gt: new Date() }
+        expiresAt: { $gt: new Date() },
       });
 
       if (cached) {
@@ -33,19 +33,11 @@ export async function POST(request) {
     }
 
     // Get track info from Spotify
-    const trackId = spotifyId || spotifyUrl.split('/track/')[1]?.split('?')[0];
+    const trackId = spotifyId || spotifyUrl.split("/track/")[1]?.split("?")[0];
     const trackData = await getTrack(trackId);
-
-    console.log('Spotify track data:', {
-      title: trackData.title,
-      artist: trackData.artist,
-      spotifyUrl: trackData.spotifyUrl
-    });
 
     // Resolve multi-platform links via Songlink
     const platformData = await resolveSong(trackData.spotifyUrl);
-
-    console.log('Songlink platform data:', platformData);
 
     const fullSongData = {
       ...trackData,
@@ -57,14 +49,6 @@ export async function POST(request) {
       appleMusicId: platformData.ids.appleMusic,
       tidalId: platformData.ids.tidal,
     };
-
-    console.log('Final song data:', {
-      title: fullSongData.title,
-      spotify: fullSongData.spotifyUrl,
-      appleMusic: fullSongData.appleMusicUrl,
-      tidal: fullSongData.tidalUrl,
-      availableOn: fullSongData.availableOn
-    });
 
     // Cache the result
     await SongCache.findOneAndUpdate(
@@ -83,9 +67,9 @@ export async function POST(request) {
       data: fullSongData,
     });
   } catch (error) {
-    console.error('Song resolution error:', error);
+    console.error("Song resolution error:", error);
     return NextResponse.json(
-      { error: 'An error occurred while resolving the song' },
+      { error: "An error occurred while resolving the song" },
       { status: 500 }
     );
   }

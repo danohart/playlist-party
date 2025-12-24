@@ -5,7 +5,6 @@ const anonymousUserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    index: true,
   },
   displayName: {
     type: String,
@@ -35,7 +34,5 @@ const anonymousUserSchema = new mongoose.Schema({
 
 // Compound index for party + display name uniqueness
 anonymousUserSchema.index({ partyId: 1, displayName: 1 }, { unique: true });
-anonymousUserSchema.index({ token: 1 });
-anonymousUserSchema.index({ createdAt: 1 }); // For TTL
 
 export default mongoose.models.AnonymousUser || mongoose.model('AnonymousUser', anonymousUserSchema);

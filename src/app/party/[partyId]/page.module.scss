@@ -139,3 +139,18 @@
   font-weight: $font-weight-medium;
   color: $color-text-secondary;
 }
+
+.controls {
+  display: flex;
+  gap: $spacing-md;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.viewToggle {
+  display: flex;
+  gap: $spacing-xs;
+  background: rgba($color-dark, 0.05);
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+}

@@ -74,14 +74,16 @@ const submissionSchema = new mongoose.Schema({
 
 submissionSchema.index({ partyId: 1, submittedAt: 1 });
 submissionSchema.index({ partyId: 1, 'submittedBy.userId': 1 });
-submissionSchema.index({ partyId: 1, 'songData.spotifyId': 1 });
 submissionSchema.index({ partyId: 1, upvotes: -1 });
 submissionSchema.index({ partyId: 1, deletedAt: 1 });
 
-// Prevent duplicate songs in same party
+// Prevent duplicate songs in same party (compound unique index)
 submissionSchema.index(
-  { partyId: 1, 'songData.spotifyId': 1 },
-  { unique: true, partialFilterExpression: { deletedAt: null } }
+  { partyId: 1, 'songData.spotifyId': 1, deletedAt: 1 },
+  { 
+    unique: true, 
+    partialFilterExpression: { deletedAt: null } 
+  }
 );
 
 export default mongoose.models.Submission || mongoose.model('Submission', submissionSchema);
