@@ -1,0 +1,63 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/breakpoints.scss';
+
+.container {
+  min-height: 100vh;
+  padding: $spacing-3xl $spacing-md;
+}
+
+.hero {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto $spacing-3xl;
+  padding: $spacing-3xl 0;
+}
+
+.title {
+  font-size: 56px;
+  margin-bottom: $spacing-lg;
+  background: linear-gradient(135deg, $color-dark 0%, $color-dark-green 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  @include respond-to('md') {
+    font-size: 72px;
+  }
+}
+
+.subtitle {
+  font-size: $font-size-xl;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-2xl;
+  line-height: $line-height-relaxed;
+}
+
+.buttons {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  h3 {
+    margin: $spacing-md 0 $spacing-sm;
+  }
+  
+  p {
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+  }
+}
+
+.featureIcon {
+  font-size: 48px;
+}

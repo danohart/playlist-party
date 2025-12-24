@@ -1,0 +1,79 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.toggleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  cursor: pointer;
+  user-select: none;
+  
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.toggleInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  
+  &:checked + .toggleSlider {
+    background-color: $color-primary;
+    
+    &::before {
+      transform: translateX(24px);
+      background-color: $color-dark;
+    }
+  }
+  
+  &:focus-visible + .toggleSlider {
+    @include focus-ring;
+  }
+  
+  &:disabled + .toggleSlider {
+    cursor: not-allowed;
+  }
+}
+
+.toggleSlider {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  background-color: rgba($color-dark, 0.2);
+  border-radius: $radius-full;
+  transition: background-color $transition-base;
+  flex-shrink: 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 4px;
+    top: 4px;
+    background-color: $color-white;
+    border-radius: 50%;
+    transition: transform $transition-base, background-color $transition-base;
+  }
+}
+
+.labelText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.helperText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-left: 68px;
+}

@@ -1,0 +1,150 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/breakpoints.scss';
+
+.header {
+  background: $color-white;
+  border-bottom: 1px solid rgba($color-dark, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  box-shadow: $shadow-sm;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: $spacing-md $spacing-lg;
+  @include flex-between;
+  gap: $spacing-lg;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  text-decoration: none;
+  transition: opacity $transition-fast;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.logoText {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-dark;
+  
+  @include mobile-only {
+    display: none;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+}
+
+.navLink {
+  color: $color-text-primary;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $color-dark-green;
+  }
+  
+  @include mobile-only {
+    display: none;
+  }
+}
+
+.userMenu {
+  position: relative;
+}
+
+.userButton {
+  @include button-reset;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-full;
+  transition: background-color $transition-fast;
+  
+  &:hover {
+    background-color: rgba($color-dark, 0.05);
+  }
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $color-primary, $color-dark-green);
+  color: $color-dark;
+  @include flex-center;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-sm;
+}
+
+.userName {
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  
+  @include mobile-only {
+    display: none;
+  }
+}
+
+.chevron {
+  font-size: 10px;
+  color: $color-text-secondary;
+  transition: transform $transition-fast;
+  
+  .userButton:hover & {
+    transform: translateY(2px);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + $spacing-xs);
+  right: 0;
+  background: $color-white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+  min-width: 180px;
+  padding: $spacing-xs;
+  animation: slideDown 0.2s ease;
+}
+
+.dropdownItem {
+  @include button-reset;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-sm;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  transition: background-color $transition-fast;
+  
+  &:hover {
+    background-color: rgba($color-primary, 0.1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

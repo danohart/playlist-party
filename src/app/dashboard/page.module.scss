@@ -1,0 +1,39 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/breakpoints.scss';
+
+.loading {
+  min-height: 100vh;
+  @include flex-center;
+}
+
+.header {
+  @include flex-between;
+  margin-bottom: $spacing-2xl;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  
+  h1 {
+    margin-bottom: $spacing-xs;
+  }
+}
+
+.subtitle {
+  color: $color-text-secondary;
+  font-size: $font-size-lg;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $spacing-xl;
+  
+  h3 {
+    margin-bottom: $spacing-sm;
+  }
+  
+  p {
+    color: $color-text-secondary;
+    margin-bottom: $spacing-md;
+  }
+}

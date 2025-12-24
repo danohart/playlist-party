@@ -1,0 +1,55 @@
+@import '@/styles/variables.scss';
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-full;
+  white-space: nowrap;
+  
+  &--small {
+    padding: 2px 8px;
+    font-size: $font-size-xs;
+  }
+  
+  &--medium {
+    padding: 4px 12px;
+    font-size: $font-size-sm;
+  }
+  
+  &--large {
+    padding: 6px 16px;
+    font-size: $font-size-md;
+  }
+  
+  &--default {
+    background-color: rgba($color-dark, 0.1);
+    color: $color-dark;
+  }
+  
+  &--primary {
+    background-color: $color-primary;
+    color: $color-dark;
+  }
+  
+  &--success {
+    background-color: rgba($color-success, 0.15);
+    color: darken($color-success, 20%);
+  }
+  
+  &--error {
+    background-color: rgba($color-error, 0.15);
+    color: darken($color-error, 10%);
+  }
+  
+  &--warning {
+    background-color: rgba($color-warning, 0.15);
+    color: darken($color-warning, 20%);
+  }
+  
+  &--info {
+    background-color: rgba($color-info, 0.15);
+    color: darken($color-info, 20%);
+  }
+}

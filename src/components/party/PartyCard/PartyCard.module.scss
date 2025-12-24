@@ -1,0 +1,72 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  cursor: pointer;
+}
+
+.header {
+  @include flex-between;
+  gap: $spacing-md;
+  align-items: flex-start;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-xs;
+}
+
+.title {
+  font-size: $font-size-lg;
+  margin: 0;
+  color: $color-dark;
+}
+
+.theme {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  margin: 0;
+  @include line-clamp(2);
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.infoIcon {
+  font-size: $font-size-md;
+}
+
+.infoText {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.footer {
+  @include flex-between;
+  padding-top: $spacing-md;
+  border-top: 1px solid rgba($color-dark, 0.1);
+  align-items: center;
+}
+
+.code {
+  font-family: 'Courier New', monospace;
+  font-size: $font-size-sm;
+  color: $color-dark-green;
+  font-weight: $font-weight-semibold;
+}

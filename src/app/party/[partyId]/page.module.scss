@@ -1,0 +1,141 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/breakpoints.scss';
+
+.loading {
+  min-height: 60vh;
+  @include flex-center;
+}
+
+.header {
+  margin-bottom: $spacing-2xl;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-sm;
+  
+  h1 {
+    margin: 0;
+  }
+}
+
+.theme {
+  font-size: $font-size-lg;
+  color: $color-dark-green;
+  font-weight: $font-weight-medium;
+  margin-bottom: $spacing-xs;
+}
+
+.description {
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-xl;
+  
+  h3 {
+    font-size: $font-size-md;
+    margin-bottom: $spacing-md;
+    color: $color-text-secondary;
+  }
+}
+
+.code {
+  font-family: 'Courier New', monospace;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $color-dark-green;
+  margin-bottom: $spacing-md;
+  letter-spacing: 2px;
+}
+
+.deadline {
+  font-weight: $font-weight-semibold;
+  color: $color-dark;
+  margin-bottom: $spacing-xs;
+}
+
+.deadlineTime {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.statsNumber {
+  font-size: 48px;
+  font-weight: $font-weight-bold;
+  color: $color-dark-green;
+  line-height: 1;
+  margin-bottom: $spacing-xs;
+}
+
+.statsLabel {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-2xl;
+  flex-wrap: wrap;
+}
+
+.submissionsHeader {
+  @include flex-between;
+  margin-bottom: $spacing-xl;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+  
+  h2 {
+    margin: 0;
+  }
+}
+
+.shareBox {
+  display: flex;
+  gap: $spacing-md;
+  align-items: center;
+  
+  @include mobile-only {
+    flex-direction: column;
+  }
+}
+
+.shareUrl {
+  flex: 1;
+  padding: $spacing-md;
+  background: rgba($color-dark, 0.05);
+  border-radius: $radius-md;
+  font-family: 'Courier New', monospace;
+  font-size: $font-size-sm;
+  color: $color-dark-green;
+  word-break: break-all;
+}
+
+.settingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-lg;
+  margin-top: $spacing-lg;
+}
+
+.setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md;
+  background: rgba($color-dark, 0.03);
+  border-radius: $radius-md;
+}
+
+.settingLabel {
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+}

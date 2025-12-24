@@ -1,0 +1,105 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/breakpoints.scss';
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color-dark, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-index-modal-backdrop;
+  padding: $spacing-md;
+  animation: fadeIn 0.2s ease;
+}
+
+.modalContent {
+  background: $color-white;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-xl;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+  
+  &--small {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  &--medium {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  &--large {
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  &--full {
+    width: 100%;
+    max-width: 1200px;
+  }
+}
+
+.closeButton {
+  @include button-reset;
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  @include flex-center;
+  font-size: 28px;
+  line-height: 1;
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+  
+  &:hover {
+    background-color: rgba($color-dark, 0.05);
+    color: $color-dark;
+  }
+  
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.modalTitle {
+  padding: $spacing-xl $spacing-xl $spacing-md;
+  margin: 0;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-dark;
+  border-bottom: 1px solid rgba($color-dark, 0.1);
+}
+
+.modalBody {
+  padding: $spacing-xl;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

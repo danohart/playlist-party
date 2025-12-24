@@ -1,0 +1,93 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/breakpoints.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-md;
+  line-height: $line-height-normal;
+  color: $color-text-primary;
+  background-color: $color-background;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: $font-size-3xl;
+  
+  @include respond-to('md') {
+    font-size: 56px;
+  }
+}
+
+h2 {
+  font-size: $font-size-2xl;
+  
+  @include respond-to('md') {
+    font-size: 40px;
+  }
+}
+
+h3 {
+  font-size: $font-size-xl;
+}
+
+a {
+  color: $color-dark-green;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $color-primary;
+  }
+  
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+button {
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-dark;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+  
+  @include respond-to('lg') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.sr-only {
+  @include visually-hidden;
+}

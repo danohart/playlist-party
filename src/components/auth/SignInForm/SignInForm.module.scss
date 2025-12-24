@@ -1,0 +1,27 @@
+@import '@/styles/variables.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: $spacing-md 0;
+  
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba($color-dark, 0.2);
+  }
+  
+  span {
+    padding: 0 $spacing-md;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+  }
+}

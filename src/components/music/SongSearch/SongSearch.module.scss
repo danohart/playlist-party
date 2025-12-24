@@ -1,0 +1,123 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.container {
+  width: 100%;
+}
+
+.selectedView {
+  margin-bottom: $spacing-md;
+}
+
+.backButton {
+  margin-bottom: $spacing-md;
+}
+
+.loading,
+.error,
+.noResults {
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-secondary;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+}
+
+.error {
+  color: $color-error;
+}
+
+.results {
+  margin-top: $spacing-md;
+  border: 1px solid rgba($color-dark, 0.1);
+  border-radius: $radius-md;
+  overflow: hidden;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.result {
+  @include button-reset;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  text-align: left;
+  transition: background-color $transition-fast;
+  border-bottom: 1px solid rgba($color-dark, 0.05);
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background-color: rgba($color-primary, 0.1);
+  }
+  
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.albumArt {
+  width: 60px;
+  height: 60px;
+  border-radius: $radius-sm;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: $font-weight-semibold;
+  color: $color-dark;
+  @include truncate;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xs;
+}
+
+.explicit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: rgba($color-dark, 0.6);
+  color: $color-white;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.artist {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  @include truncate;
+  margin-bottom: 2px;
+}
+
+.album {
+  color: $color-text-tertiary;
+  font-size: $font-size-xs;
+  @include truncate;
+}
+
+.duration {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}

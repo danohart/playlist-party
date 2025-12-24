@@ -1,0 +1,105 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/breakpoints.scss';
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $spacing-2xl;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba($color-dark, 0.1);
+    z-index: 0;
+  }
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.progressCircle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $color-white;
+  border: 2px solid rgba($color-dark, 0.2);
+  @include flex-center;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-base;
+  
+  .active & {
+    border-color: $color-primary;
+    background: $color-primary;
+    color: $color-dark;
+  }
+  
+  .completed & {
+    border-color: $color-dark-green;
+    background: $color-dark-green;
+    color: $color-white;
+    
+    &::before {
+      content: '✓';
+    }
+  }
+}
+
+.progressLabel {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+  
+  .active & {
+    color: $color-dark;
+  }
+  
+  @include mobile-only {
+    display: none;
+  }
+}
+
+.step {
+  h2 {
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.stepDescription {
+  color: $color-text-secondary;
+  margin-bottom: $spacing-xl;
+  line-height: $line-height-relaxed;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-2xl;
+  padding-top: $spacing-xl;
+  border-top: 1px solid rgba($color-dark, 0.1);
+}
