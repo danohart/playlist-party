@@ -1,5 +1,42 @@
 @import '@/styles/variables.scss';
 
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.googleButton {
+  position: relative;
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 16px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: $spacing-md 0;
+  
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba($color-dark, 0.2);
+  }
+  
+  span {
+    padding: 0 $spacing-md;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;

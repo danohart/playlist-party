@@ -36,15 +36,35 @@ export async function POST(request) {
     const trackId = spotifyId || spotifyUrl.split('/track/')[1]?.split('?')[0];
     const trackData = await getTrack(trackId);
 
+    console.log('Spotify track data:', {
+      title: trackData.title,
+      artist: trackData.artist,
+      spotifyUrl: trackData.spotifyUrl
+    });
+
     // Resolve multi-platform links via Songlink
     const platformData = await resolveSong(trackData.spotifyUrl);
 
+    console.log('Songlink platform data:', platformData);
+
     const fullSongData = {
       ...trackData,
-      ...platformData.links,
+      spotifyUrl: platformData.links.spotify,
+      appleMusicUrl: platformData.links.appleMusic,
+      tidalUrl: platformData.links.tidal,
       songlinkUrl: platformData.songlinkUrl,
       availableOn: platformData.availableOn,
+      appleMusicId: platformData.ids.appleMusic,
+      tidalId: platformData.ids.tidal,
     };
+
+    console.log('Final song data:', {
+      title: fullSongData.title,
+      spotify: fullSongData.spotifyUrl,
+      appleMusic: fullSongData.appleMusicUrl,
+      tidal: fullSongData.tidalUrl,
+      availableOn: fullSongData.availableOn
+    });
 
     // Cache the result
     await SongCache.findOneAndUpdate(

@@ -29,13 +29,13 @@ export function useAuth() {
     
     const data = await response.json();
     
-    if (data.success) {
-      localStorage.setItem('anonymousToken', data.data.token);
-      setAnonymousToken(data.data.token);
-      return data.data;
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to create anonymous user');
     }
     
-    throw new Error(data.error || 'Failed to create anonymous user');
+    localStorage.setItem('anonymousToken', data.data.token);
+    setAnonymousToken(data.data.token);
+    return data.data;
   };
   
   return {

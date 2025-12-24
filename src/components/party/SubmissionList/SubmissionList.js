@@ -61,7 +61,8 @@ export default function SubmissionList({ submissions, showSubmitter = false }) {
           </div>
 
           <div className={styles.platforms}>
-            {submission.songData.availableOn?.spotify && (
+            {/* Spotify Link */}
+            {submission.songData.spotifyUrl && (
               <a
                 href={submission.songData.spotifyUrl}
                 target='_blank'
@@ -76,7 +77,9 @@ export default function SubmissionList({ submissions, showSubmitter = false }) {
                 />
               </a>
             )}
-            {submission.songData.availableOn?.appleMusic && (
+
+            {/* Apple Music Link */}
+            {submission.songData.appleMusicUrl && (
               <a
                 href={submission.songData.appleMusicUrl}
                 target='_blank'
@@ -91,7 +94,9 @@ export default function SubmissionList({ submissions, showSubmitter = false }) {
                 />
               </a>
             )}
-            {submission.songData.availableOn?.tidal && (
+
+            {/* Tidal Link */}
+            {submission.songData.tidalUrl && (
               <a
                 href={submission.songData.tidalUrl}
                 target='_blank'
@@ -106,6 +111,21 @@ export default function SubmissionList({ submissions, showSubmitter = false }) {
                 />
               </a>
             )}
+
+            {/* Universal Songlink (if other platforms aren't available) */}
+            {submission.songData.songlinkUrl &&
+              !submission.songData.appleMusicUrl &&
+              !submission.songData.tidalUrl && (
+                <a
+                  href={submission.songData.songlinkUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className={styles.platformLink}
+                  title='Open in other platforms'
+                >
+                  <span className={styles.platformText}>🔗</span>
+                </a>
+              )}
           </div>
         </div>
       ))}

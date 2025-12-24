@@ -41,11 +41,17 @@ export const authOptions = {
         };
       }
     }),
-    // Uncomment when you have Google OAuth credentials
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_CLIENT_ID,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    // }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
+    }),
   ],
   
   callbacks: {
@@ -78,13 +84,26 @@ export const authOptions = {
         
         if (!existingUser) {
           // Create new user from OAuth
-          await User.create({
+          const newUser = await User.create({
             email: user.email,
             name: user.name || profile?.name,
             oauthProvider: 'google',
             oauthId: account.providerAccountId,
             emailVerified: true,
           });
+          
+          // Update token with new user ID
+          user.id = newUser._id.toString();
+        } else {
+          // Update existing user if they signed up with email/password first
+          if (!existingUser.oauthProvider) {
+            existingUser.oauthProvider = 'google';
+            existingUser.oauthId = account.providerAccountId;
+            existingUser.emailVerified = true;
+            await existingUser.save();
+          }
+          
+          user.id = existingUser._id.toString();
         }
       }
       

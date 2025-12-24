@@ -42,6 +42,9 @@ export default function Header() {
               <Link href="/parties" className={styles.navLink}>
                 My Parties
               </Link>
+              <Link href="/join" className={styles.navLink}>
+                Join Party
+              </Link>
               <Link href="/create" className={styles.navLink}>
                 Create Party
               </Link>
@@ -87,6 +90,9 @@ export default function Header() {
             </>
           ) : (
             <>
+              <Link href="/join" className={styles.navLink}>
+                Join Party
+              </Link>
               <Link href="/auth/signin" className={styles.navLink}>
                 Sign In
               </Link>
